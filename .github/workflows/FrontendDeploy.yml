@@ -16,7 +16,10 @@ jobs:
       
     - name: eko
       run: cat ./FrontendServerKeyPair.pem
-          
+      
+    - name: cmod
+      run: chmod 777 ./FrontendServerKeyPair.pem
+      
     - name: Clear the machine
       uses: appleboy/ssh-action@master
       with:
