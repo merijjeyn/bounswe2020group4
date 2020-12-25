@@ -13,13 +13,12 @@ jobs:
     steps:
    
     - uses: actions/checkout@v2
-    
-    - name: Build the Docker Image
-      run: docker build -t webimage web
-    
-    - name: Save the Docker Image
-      run: docker save webimage | gzip > webimage.tar.gz
-   
+      
+    - name: eko
+      run: echo $FRONTEND_PRIVATE_KEY
+      env:
+        FRONTEND_PRIVATE_KEY: ${{ secrets.FRONTEND_PRIVATE_KEY }}  
+      
     - name: Clear the machine
       uses: appleboy/ssh-action@master
       with:
@@ -34,6 +33,27 @@ jobs:
           mkdir ~/app
       env:
         FRONTEND_PRIVATE_KEY: ${{ secrets.FRONTEND_PRIVATE_KEY }}  
+    
+    - name: Build the Docker Image
+      run: docker build -t webimage web
+    
+    - name: Save the Docker Image
+      run: docker save webimage | gzip > webimage.tar.gz
+   
+#     - name: Clear the machine
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ec2-3-17-180-100.us-east-2.compute.amazonaws.com
+#         username: ubuntu
+#         key: $FRONTEND_PRIVATE_KEY
+#         script_stop: true
+#         script: | 
+#           sudo rm -rf ~/app || true
+#           sudo docker container stop $(sudo docker container ls -aq) || true
+#           docker system prune –af ––volumes || true
+#           mkdir ~/app
+#       env:
+#         FRONTEND_PRIVATE_KEY: ${{ secrets.FRONTEND_PRIVATE_KEY }}  
     
     - name: Push Docker Image to AWS
       uses: appleboy/scp-action@master
