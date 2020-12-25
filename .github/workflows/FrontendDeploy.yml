@@ -25,7 +25,7 @@ jobs:
       with:
         host: ec2-3-17-180-100.us-east-2.compute.amazonaws.com
         username: ec2-user
-        key: ${{ secrets.FRONTEND_PRIVATE_KEY }}
+        key_path: ./FrontendServerKeyPair.pem
         script_stop: true
         script: | 
           sudo rm -rf ~/app || true
@@ -37,7 +37,7 @@ jobs:
       uses: appleboy/scp-action@master
       with:
         host: ec2-3-17-180-100.us-east-2.compute.amazonaws.com
-        key: ${{ secrets.FRONTEND_PRIVATE_KEY }}
+        key_path: ./FrontendServerKeyPair.pem
         username: ec2-user
         source: webimage.tar.gz
         target: ~/app/
@@ -47,7 +47,7 @@ jobs:
       with:
         host: ec2-3-17-180-100.us-east-2.compute.amazonaws.com
         username: ec2-user
-        key: ${{ secrets.FRONTEND_PRIVATE_KEY }}
+        key_path: FrontendServerKeyPair.pem
         script_stop: true
         script: | 
           cd ~/app
