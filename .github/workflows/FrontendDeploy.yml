@@ -31,8 +31,6 @@ jobs:
           sudo docker container stop $(sudo docker container ls -aq) || true
           docker system prune –af ––volumes || true
           mkdir ~/app
-      env:
-        FRONTEND_PRIVATE_KEY: ${{ secrets.FRONTEND_PRIVATE_KEY }}  
     
     - name: Build the Docker Image
       run: docker build -t webimage web
