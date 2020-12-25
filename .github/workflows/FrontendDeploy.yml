@@ -24,7 +24,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ec2-3-17-180-100.us-east-2.compute.amazonaws.com
-        username: ubuntu
+        username: ec2-user
         key_path: ./FrontendServerKeyPair.pem
         script_stop: true
         script: | 
