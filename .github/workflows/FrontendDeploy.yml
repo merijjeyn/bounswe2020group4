@@ -15,7 +15,9 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Debug
-      run: echo ${{ secrets.FRONTEND_PRIVATE_KEY }}
+      run: echo $mykey
+      env:
+        mykey: ${{ secrets.FRONTEND_PRIVATE_KEY }}  
     
     - name: Build the Docker Image
       run: docker build -t webimage web
