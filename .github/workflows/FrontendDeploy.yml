@@ -60,4 +60,4 @@ jobs:
         script: | 
           cd ~/app
           sudo docker load -i webimage.tar.gz
-          sudo docker run -p 80:80 webimage
+          sudo docker run -p 80:80 -d webimage
