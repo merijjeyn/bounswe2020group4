@@ -37,8 +37,8 @@ jobs:
         script_stop: true
         script: | 
           sudo rm -rf ~/app || true
-          sudo docker container stop $(sudo docker container ls -aq) || true
-          docker system prune –af ––volumes || true
+          sudo docker rm -f $(sudo docker ps -a -q)
+          sudo docker system prune –af || true
           mkdir ~/app
     
     - name: Push Docker Image to AWS
